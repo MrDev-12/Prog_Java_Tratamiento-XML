@@ -11,7 +11,7 @@ import org.xml.sax.InputSource;
 import org.w3c.dom.*;
 
 
-public class Dam105t3e301 {
+public class Dam105t3e302 {
 
     public static void main(String[] args) {
         
@@ -31,9 +31,31 @@ public class Dam105t3e301 {
             DocumentBuilder dB = factory.newDocumentBuilder();
             Document doc = dB.parse(new InputSource(isr));
 
-            Element raiz = doc.getDocumentElement();
-            
-            System.out.print("Elemento Raíz: " + raiz.getNodeName());
+            NodeList listaLibros = doc.getElementsByTagName("libro");
+
+            for (int i = 0; i < listaLibros.getLength(); i++) {
+
+                int x = i + 1;
+
+                Element element = (Element) listaLibros.item(i);
+
+                String nombre;
+
+                if (element.getElementsByTagName("titulo").item(0) != null) {
+
+                    nombre = element.getElementsByTagName("titulo").item(0).getTextContent();
+
+                }
+
+                else {
+
+                    nombre = "Sin Título";
+
+                }
+
+                System.out.println("Libro " + x + ": " + nombre);
+                
+            }
 
         } catch (Exception e) {
 
